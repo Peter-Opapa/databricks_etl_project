@@ -91,7 +91,7 @@ Benefits:
 #### 🔹 Declarative Pipeline View
 ![Lakeflow Declarative Pipeline](images/Lakeflow_Declarative_Pipeline.png)
 
-#### 🔹 Job Execution Flow
+#### 🔹 Job Execution List
 ![Lakeflow Job Execution](images/lakeflow_job_execution.png)
 
 
@@ -120,5 +120,17 @@ Benefits:
 │
 ├── requirements.txt
 └── README.md
+
+---
+## ✅ Features Summary
+
+- ✅ Automated ingestion via **Fivetran**
+- ✅ **Medallion Architecture**: Bronze → Silver → Gold
+- ✅ **Star Schema** modeling (Fact + Dimension tables)
+- ✅ **PySpark** and **Spark SQL** transformation logic
+- ✅ **Delta Live Tables (DLT)** with built-in **CDC** and **SCD** handling
+- ✅ **LakeFlow** for visual orchestration and job monitoring
+- ✅ **Parameterized Notebooks** for modular, reusable workflows
+---
 
 
