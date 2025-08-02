@@ -1,12 +1,12 @@
-# 🔁 End-to-End Data Pipeline: Fivetran → Databricks Lakehouse (DLT, CDC, SCD)
+# 🏗️ End-to-End Data Pipeline: Fivetran → Databricks Lakehouse (DLT, CDC, SCD)
 
-This project showcases a production-grade data pipeline using **Fivetran**, **Google Drive**, **PySpark**, **Databricks**, **Delta Live Tables (DLT)**, and **Delta Lake**. The pipeline automates ingestion, transformation, and CDC/SCD handling on top of a Lakehouse architecture using **LakeFlow** declarative pipelines.
+This project demonstrates a complete, production-ready **ETL pipeline** that ingests data from **Google Drive via Fivetran**, processes it through the **Medallion Architecture** (Bronze → Silver → Gold) using **PySpark** and **Delta Live Tables**, and applies **CDC** and **SCD** logic to maintain up-to-date business records. The pipeline follows the **Star Schema** modeling technique, utilizes **parameterized notebooks** for dynamic ingestion/transformation, and is orchestrated using **LakeFlow Declrative Pipeline**.
 
 ---
 
-## 📐 Architecture Overview
+## 🧭 Architecture Overview
 
-> 📌 *Embed your architecture diagram below:*
+> 📌 *Embed your system architecture diagram below:*
 
 ![Architecture Diagram](images/architecture-diagram.png)
 
@@ -14,50 +14,63 @@ This project showcases a production-grade data pipeline using **Fivetran**, **Go
 
 ## 🧰 Tools & Technologies
 
-| Tool                     | Purpose                                                       |
-|--------------------------|---------------------------------------------------------------|
-| **Fivetran**             | Automated ingestion from Google Drive                         |
-| **Google Drive**         | Source of raw CSV/Excel data                                  |
-| **Databricks**           | Cloud data platform for large-scale data processing           |
-| **Auto Loader**          | Efficient schema evolution + file streaming into Bronze layer |
-| **PySpark & Spark SQL**  | Batch + streaming transformations in Silver layer             |
-| **Delta Live Tables (DLT)** | CDC and SCD management using declarative pipelines       |
-| **LakeFlow**             | Visual orchestration of pipelines and job management          |
-| **Delta Lake**           | ACID-compliant data lake storage with time travel             |
+| Tool / Tech                 | Role                                                                 |
+|-----------------------------|----------------------------------------------------------------------|
+| **Fivetran**                | Automated ELT from Google Drive to Databricks                       |
+| **Google Drive**            | Source of raw Excel/CSV files                                       |
+| **Databricks Auto Loader**  | Ingest files into Bronze with schema inference                      |
+| **PySpark / Spark SQL**     | Data cleansing, enrichment, and transformation in Silver layer      |
+| **Delta Live Tables (DLT)** | Declarative pipeline with CDC + SCD support in the Gold layer       |
+| **Delta Lake**              | ACID-compliant, scalable lakehouse storage                          |
+| **LakeFlow**                | Workflow orchestration and visual pipeline management               |
+| **Star Schema**             | Dimensional data modeling for analytics                             |
+| **Medallion Architecture**  | Layered data design (Bronze → Silver → Gold)                        |
+| **Parameterized Notebooks** | Dynamic and reusable notebooks for data loading & processing        |
 
 ---
 
-## 🔄 Pipeline Flow
+## 🔄 Data Pipeline Stages
 
-1. **Ingestion (Bronze Layer)**
-   - Raw data is ingested from Google Drive using Fivetran.
-   - Databricks Auto Loader streams data into the Bronze Delta table with schema inference.
+### 1️⃣ Bronze Layer – Raw Ingestion
 
-2. **Transformation (Silver Layer)**
-   - PySpark and Spark SQL clean, filter, normalize, and enrich data.
-   - Stored as structured Delta tables.
+- Ingest data from **Google Drive** using **Fivetran** connectors.
+- Store raw files in **Delta tables** using **Auto Loader**.
+- Notebooks are **parameterized** to dynamically load different source tables.
 
-3. **CDC & SCD Handling (Gold Layer)**
-   - Delta Live Tables (DLT) applies declarative CDC and SCD logic.
-   - Runs on LakeFlow for orchestration, scheduling, and lineage tracking.
+### 2️⃣ Silver Layer – Cleansed Data
 
-4. **Output**
-   - Final business-ready datasets stored in Delta format.
-   - Ready for BI tools, analytics, or ML consumption.
+- Apply **PySpark** and **SQL** logic to clean, join, filter, and structure the data.
+- Star schema design with fact and dimension tables.
+- Reuse **parameterized notebooks** to transform data from multiple sources.
+
+### 3️⃣ Gold Layer – Business-ready Analytics
+
+- Apply **CDC/SCD logic** via **Delta Live Tables (DLT)**.
+- Implement slowly changing dimensions (SCD Type 1 and 2).
+- Use LakeFlow for job orchestration and monitoring.
 
 ---
 
-## 🧪 Code Example (DLT CDC Table)
+## 🌟 Data Modeling Approach
 
-```python
-@dlt.table(
-    comment="Gold table with CDC applied"
-)
-@dlt.expect_or_drop("not_null_id", "customer_id IS NOT NULL")
-def gold_customers():
-    df = dlt.read_stream("silver_customers")
-    return (
-        df.dropDuplicates(["customer_id"])
-          .withWatermark("updated_at", "2 hours")
-    )
-# databricks_etl_project
+This pipeline uses the **Star Schema** for organizing transformed data into:
+- **Fact Tables**: e.g., sales, transactions, etc.
+- **Dimension Tables**: e.g., customers, products, time, region, etc.
+
+Benefits:
+- Simplifies BI queries
+- Supports OLAP-style analysis
+- Works well with tools like Power BI or Tableau
+
+---
+
+## 🗂️ Medallion Architecture Layers
+
+| Layer      | Format      | Description                                        |
+|------------|-------------|----------------------------------------------------|
+| **Bronze** | Raw Delta   | Unprocessed data directly from Fivetran            |
+| **Silver** | Clean Delta | Transformed and joined data (star schema)          |
+| **Gold**   | Curated Delta| CDC/SCD-applied business-ready analytics layer     |
+
+---
+
