@@ -120,7 +120,7 @@ Benefits:
 │
 ├── requirements.txt
 └── README.md
-
+```
 ---
 ## ✅ Features Summary
 
