@@ -74,35 +74,50 @@ Benefits:
 ## 🧪 Visuals
 
 ### 📌 Pipeline Job Diagrams
-![Pipeline Diagram](images/Pipeline_end_to_end.png)
-![Pipeline Diagram](images/end_to_end_pipeline.png)
-![Pipeline Diagram](images/overview.png)
+
+#### 🔸 Pipeline End-to-End View
+![Pipeline End-to-End](images/Pipeline_end_to_end.png)
+
+#### 🔸 High-Level Overview
+![Overview](images/overview.png)
+
+#### 🔸 Component Breakdown
+![Component Breakdown](images/end_to_end_pipeline.png)
+
+---
 
 ### 📌 LakeFlow Declarative Pipeline
-![Pipeline Diagram](images/Lakeflow_Declarative_Pipeline.png)
-![Pipeline Diagram](images/lakeflow_job_execution.png)
+
+#### 🔹 Declarative Pipeline View
+![Lakeflow Declarative Pipeline](images/Lakeflow_Declarative_Pipeline.png)
+
+#### 🔹 Job Execution Flow
+![Lakeflow Job Execution](images/lakeflow_job_execution.png)
+
 
 ---
 ## 📂 Project Structure
+```plaintext
 📁 databricks-lakehouse-pipeline/
 ├── notebooks/
 │   ├── Gold_Customers.ipynb
 │   ├── Gold_Orders.ipynb
 │   ├── Gold_Products.ipynb
-|   ├── Silver_Customers.ipynb
-|   ├── Silver_Orders.ipynb
-|   ├── Silver_Products.ipynb
-|   ├── Silver_Region.ipynb
-|   ├── bronze_auto_loader.ipynb
-|   └── Parameters.ipynb
-│       
+│   ├── Silver_Customers.ipynb
+│   ├── Silver_Orders.ipynb
+│   ├── Silver_Products.ipynb
+│   ├── Silver_Region.ipynb
+│   ├── bronze_auto_loader.ipynb
+│   └── Parameters.ipynb
+│
 ├── images/
 │   ├── architecture.png
 │   ├── lakeflow_declarative_pipeline.png
 │   ├── pipeline_end_to_end.png
-|   ├── end_to_end_pipeline.png
-|   ├── lakeflow_job_execution.png
-|   └── overview.png
+│   ├── end_to_end_pipeline.png
+│   ├── lakeflow_job_execution.png
+│   └── overview.png
+│
 ├── requirements.txt
 └── README.md
 
