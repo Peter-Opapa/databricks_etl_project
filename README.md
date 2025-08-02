@@ -8,7 +8,7 @@ This project demonstrates a complete, production-ready **ETL pipeline** that ing
 
 > 📌 *Embed your system architecture diagram below:*
 
-![Architecture Diagram](images/architecture-diagram.png)
+![Architecture Diagram](images/Architecture.png)
 
 ---
 
