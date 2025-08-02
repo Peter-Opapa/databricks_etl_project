@@ -1,0 +1,65 @@
+resources:
+  jobs:
+    End_To_End_Pipeline:
+      name: End-To-End-Pipeline
+      tasks:
+        - task_key: parameters
+          notebook_task:
+            notebook_path: /Workspace/Users/opapapeter82@gmail.com/databricks_etl_project/parameters
+            source: WORKSPACE
+        - task_key: bronze_autoloader
+          depends_on:
+            - task_key: parameters
+          for_each_task:
+            inputs: "{{tasks.parameters.values.output_datasets}}"
+            task:
+              task_key: bronze_autoloader_iteration
+              notebook_task:
+                notebook_path: /Workspace/Users/opapapeter82@gmail.com/databricks_etl_project/bronze_auto_loader
+                base_parameters:
+                  file_name: "{{input.file_name}}"
+                source: WORKSPACE
+        - task_key: Silver_Customers
+          depends_on:
+            - task_key: bronze_autoloader
+          notebook_task:
+            notebook_path: /Workspace/Users/opapapeter82@gmail.com/databricks_etl_project/Silver_Customers
+            source: WORKSPACE
+        - task_key: Silver_Orders
+          depends_on:
+            - task_key: bronze_autoloader
+          notebook_task:
+            notebook_path: /Workspace/Users/opapapeter82@gmail.com/databricks_etl_project/Silver_Orders
+            source: WORKSPACE
+        - task_key: Silver_Products
+          depends_on:
+            - task_key: bronze_autoloader
+          notebook_task:
+            notebook_path: /Workspace/Users/opapapeter82@gmail.com/databricks_etl_project/Silver_Products
+            source: WORKSPACE
+        - task_key: Gold_Customers
+          depends_on:
+            - task_key: Silver_Customers
+            - task_key: Silver_Orders
+            - task_key: Silver_Products
+          notebook_task:
+            notebook_path: /Workspace/Users/opapapeter82@gmail.com/databricks_etl_project/Gold_Customers
+            source: WORKSPACE
+        - task_key: Gold_Products
+          depends_on:
+            - task_key: Silver_Products
+            - task_key: Silver_Orders
+            - task_key: Silver_Customers
+          pipeline_task:
+            pipeline_id: 383d9df5-bc17-4a6c-bcff-f0f7be019b3a
+            full_refresh: false
+        - task_key: Fact_Orders
+          depends_on:
+            - task_key: Gold_Customers
+            - task_key: Gold_Products
+          notebook_task:
+            notebook_path: /Workspace/Users/opapapeter82@gmail.com/databricks_etl_project/Gold_Orders
+            source: WORKSPACE
+      queue:
+        enabled: true
+      performance_target: STANDARD

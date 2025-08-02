@@ -1,0 +1,14 @@
+resources:
+  pipelines:
+    pipeline_gold_products:
+      name: Gold_Products
+      libraries:
+        - notebook:
+            path: /Users/opapapeter82@gmail.com/databricks_etl_project/Gold_Products
+      schema: gold
+      continuous: false
+      development: true
+      photon: true
+      channel: PREVIEW
+      catalog: databricks_etl
+      serverless: true
