@@ -6,8 +6,6 @@ This project demonstrates a complete, production-ready **ETL pipeline** that ing
 
 ## 🧭 Architecture Overview
 
-> 📌 *Embed your system architecture diagram below:*
-
 ![Architecture Diagram](images/Architecture.png)
 
 ---
@@ -69,8 +67,43 @@ Benefits:
 | Layer      | Format      | Description                                        |
 |------------|-------------|----------------------------------------------------|
 | **Bronze** | Raw Delta   | Unprocessed data directly from Fivetran            |
-| **Silver** | Clean Delta | Transformed and joined data (star schema)          |
+| **Silver** | Clean Delta | Transformed and joined data (pySpark&SQL)          |
 | **Gold**   | Curated Delta| CDC/SCD-applied business-ready analytics layer     |
 
 ---
+## 🧪 Visuals
+
+###📌 Pipeline Job Diagrams
+![Pipeline Diagram](images/Pipeline_end_to_end.png)
+![Pipeline Diagram](images/end_to_end_pipeline.png)
+![Pipeline Diagram](images/overview.png)
+
+###📌 LakeFlow Declarative Pipeline
+![Pipeline Diagram](images/Lakeflow_Declarative_Pipeline.png)
+![Pipeline Diagram](images/lakeflow_job_execution.png)
+
+---
+##📂 Project Structure
+📁 databricks-lakehouse-pipeline/
+├── notebooks/
+│   ├── Gold_Customers.ipynb
+│   ├── Gold_Orders.ipynb
+│   ├── Gold_Products.ipynb
+|   ├── Silver_Customers.ipynb
+|   ├── Silver_Orders.ipynb
+|   ├── Silver_Products.ipynb
+|   ├── Silver_Region.ipynb
+|   ├── bronze_auto_loader.ipynb
+|   └── Parameters.ipynb
+│       
+├── images/
+│   ├── architecture.png
+│   ├── lakeflow_declarative_pipeline.png
+│   ├── pipeline_end_to_end.png
+|   ├── end_to_end_pipeline.png
+|   ├── lakeflow_job_execution.png
+|   └── overview.png
+├── requirements.txt
+└── README.md
+
 
