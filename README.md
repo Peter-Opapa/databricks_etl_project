@@ -73,17 +73,17 @@ Benefits:
 ---
 ## 🧪 Visuals
 
-###📌 Pipeline Job Diagrams
+### 📌 Pipeline Job Diagrams
 ![Pipeline Diagram](images/Pipeline_end_to_end.png)
 ![Pipeline Diagram](images/end_to_end_pipeline.png)
 ![Pipeline Diagram](images/overview.png)
 
-###📌 LakeFlow Declarative Pipeline
+### 📌 LakeFlow Declarative Pipeline
 ![Pipeline Diagram](images/Lakeflow_Declarative_Pipeline.png)
 ![Pipeline Diagram](images/lakeflow_job_execution.png)
 
 ---
-##📂 Project Structure
+## 📂 Project Structure
 📁 databricks-lakehouse-pipeline/
 ├── notebooks/
 │   ├── Gold_Customers.ipynb
